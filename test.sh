@@ -3,7 +3,6 @@
 docker build -t wine . || exit 1
 
 xhost +
-
 docker run --rm -it \
   --name wine \
   --device /dev/dri \
@@ -25,10 +24,4 @@ docker run --rm -it \
   -v /home/thomas/games/wine/nfsu2_docker/local-settings:/home/wine/local-settings \
   -w /home/wine/nfsu2 \
   wine "$@"
-#  --group-add render \
-#  --group-add video \
-#  --device /dev/vga_arbiter \
-#  -e RENDER_GID=$( cat /etc/group | grep render | cut -f3 -d":" ) \
-#  --shm-size=4G \
-#  -e WINETRICKS="win7 d3dx9" \
-#  --network none \
+xhost -
