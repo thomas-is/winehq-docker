@@ -1,5 +1,6 @@
 FROM i386/debian:bullseye-slim
 
+ENV USER_ID    1000
 ENV AUDIO_GID  29
 ENV VIDEO_GID  44
 ENV WINETRICKS ""

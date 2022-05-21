@@ -1,8 +1,8 @@
 #!/bin/sh
 
-docker build -t wine . || exit 1
+docker build -t wine ./docker || exit 1
 
-xhost +
+#xhost +
 docker run --rm -it \
   --name wine \
   --device /dev/dri \
@@ -24,4 +24,4 @@ docker run --rm -it \
   -v /home/thomas/games/wine/nfsu2_docker/local-settings:/home/wine/local-settings \
   -w /home/wine/nfsu2 \
   wine "$@"
-xhost -
+#xhost -
