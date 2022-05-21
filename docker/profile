@@ -4,8 +4,8 @@ GREEN="\[\e[1;32m\]"
 ORANGE="\[\e[1;33m\]"
 BLUE="\[\e[1;34m\]"
 
-#VERSION=$( wine --version | cut -f2 -d"-" )
-PS1="$GREEN\u$NORMAL:$BLUE\w$NORMAL# "
+VERSION=$( wine --version | sed 's/ .*$//g' | cut -f2 -d'-' )
+PS1="$GREEN\u-$VERSION$NORMAL:$BLUE\w$NORMAL# "
 
 alias l="ls -l"
 alias ll="ls -al"

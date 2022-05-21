@@ -1,6 +1,8 @@
 #!/bin/bash
 
 RST="\033[0m"
+BLD="\033[1m"
+GRY="\033[2m"
 RED="\033[1;31m"
 GRN="\033[1;32m"
 ORG="\033[1;33m"
@@ -16,33 +18,36 @@ warn() {
 }
 run() {
   CMD="$@"
-  printf "[${BLU}entrypoint$RST] $CMD\n"
-#  $CMD
+  printf "[${BLU}entrypoint$RST] $GRY$CMD$RST\n"
+  eval $CMD
 }
 
-info setup audio and video groups
-run groupmod -g $VIDEO_GID video
+info setup audio group
 run groupmod -g $AUDIO_GID audio
-run usermod -a -G video  wine
-run usermod -a -G audio  wine
-info setup user id
+info setup video group
+run groupmod -g $VIDEO_GID video
+info setup wine user
 run usermod wine -u $USER_ID
+run usermod -a -G audio  wine
+run usermod -a -G video  wine
+run chown wine /home/wine
 
 ## skip MONO install on init
 #su wine -c "WINEDLLOVERRIDES=\"mscoree=\" wineboot"
 info boot wine
 run su wine -c "wineboot"
 
-if [ -d "/home/wine/local-settings" ] ; then
-  LINK="/home/wine/.wine/drive_c/users/wine/Local Settings"
-  info "setup symlink to ~/local-settings"
-  rm -rf "$LINK"
-  ln -s /home/wine/local-settings "$LINK"
+SRC="/home/wine/local-settings"
+LINK="/home/wine/.wine/drive_c/users/wine/Local\ Settings"
+if [ -d "$SRC" ] ; then
+  warn "found $SRC, forcing symlink"
+  run rm -rf "$LINK"
+  run ln -s /home/wine/local-settings "$LINK"
 fi
 
 # winetricks section
 if [ "$WINETRICKS" != "" ] ; then
-  info "winetricks setup"
+  info "winetricks"
   run su wine -c "winetricks $WINETRICKS"
 fi
 
