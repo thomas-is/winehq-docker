@@ -1,18 +1,19 @@
-FROM i386/debian:bullseye-slim
+ARG DEBIAN="bullseye"
+FROM i386/debian:$DEBIAN-slim
 
 ENV USER_ID    1000
 ENV AUDIO_GID  29
 ENV VIDEO_GID  44
 ENV WINETRICKS ""
 
-RUN apt-get update -y && apt-get upgrade -y
-RUN apt-get install -y \
-  sudo \
-  wine32 \
+RUN apt-get update -y && apt-get upgrade -y && apt-get install -y \
+  cabextract \
   pulseaudio \
-  wget \
+  sudo \
   unzip \
-  cabextract
+  wget \
+  wine32 \
+  && rm -rf /var/lib/apt/lists/*
 
 ADD https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks /usr/bin/winetricks
 RUN chmod 755 /usr/bin/winetricks
