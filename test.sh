@@ -1,6 +1,6 @@
 #!/bin/sh
 
-docker build -t wine ./docker || exit 1
+docker build --build-arg DEBIAN="testing" -t wine ./docker || exit 1
 
 #xhost +
 docker run --rm -it \
