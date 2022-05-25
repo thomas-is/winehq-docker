@@ -30,6 +30,8 @@ run usermod wine -u $USER_ID
 run usermod -a -G audio  wine
 run usermod -a -G video  wine
 run chown wine /home/wine
+run mkdir -p /home/wine/.wine
+run chown wine /home/wine/.wine
 ## skip MONO install on init
 #su wine -c "WINEDLLOVERRIDES=\"mscoree=\" wineboot"
 run su wine -c "wineboot"
@@ -37,14 +39,13 @@ run su wine -c "wineboot"
 SRC="/home/wine/local-settings"
 LINK="/home/wine/.wine/drive_c/users/wine/Local\ Settings"
 if [ -d "$SRC" ] ; then
-  info "found $SRC, forcing symlink"
+  info "found $SRC"
+  warn "forcing symlink to $SRC"
   run rm -rf "$LINK"
+  run mkdir -p "$(dirname "$LINK")"
   run ln -s /home/wine/local-settings "$LINK"
 fi
 
-# winetricks section
-if [ "$WINETRICKS" != "" ] ; then
-  run su wine -c "winetricks $WINETRICKS"
-fi
+run "su wine -c \"winetricks ${WINETRICKS:-good}\""
 
 exec "$@"

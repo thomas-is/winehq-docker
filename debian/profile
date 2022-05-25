@@ -7,6 +7,6 @@ BLUE="\[\e[1;34m\]"
 VERSION=$( wine --version | sed 's/ .*$//g' | cut -f2 -d'-' )
 PS1="$GREEN\u-$VERSION$NORMAL:$BLUE\w$NORMAL# "
 
-alias l="ls -l"
-alias ll="ls -al"
+alias l="ls -l --color"
+alias ll="ls -al --color"
 alias vi="vim"
