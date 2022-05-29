@@ -21,31 +21,29 @@ run() {
   printf "[${BLU}entrypoint$RST] $GRY$CMD$RST\n"
   eval $CMD
 }
-
 info "starting $(realpath $0)"
 run export WINEARCH="win32"
-run groupmod -g $AUDIO_GID audio
 run groupmod -g $VIDEO_GID video
 run usermod wine -u $USER_ID
-run usermod -a -G audio  wine
 run usermod -a -G video  wine
-run chown wine /home/wine
+run chown wine:wine /home/wine
 run mkdir -p /home/wine/.wine
-run chown wine /home/wine/.wine
-## skip MONO install on init
-#su wine -c "WINEDLLOVERRIDES=\"mscoree=\" wineboot"
-run su wine -c "wineboot"
+run chown wine:wine /home/wine/.wine
 
-SRC="/home/wine/local-settings"
-LINK="/home/wine/.wine/drive_c/users/wine/Local\ Settings"
-if [ -d "$SRC" ] ; then
-  info "found $SRC"
-  warn "forcing symlink to $SRC"
-  run rm -rf "$LINK"
-  run mkdir -p "$(dirname "$LINK")"
-  run ln -s /home/wine/local-settings "$LINK"
+LINK="/home/wine/.wine/drive_c/users/wine"
+TARGET="/home/wine/user"
+if [ -d "$TARGET" ] ; then
+  info "found $TARGET"
+  warn "forcing symlink to $LINK"
+  run rm -rf $LINK
+  run mkdir -p $( dirname $LINK )
+  run ln -s "$TARGET" "$LINK"
 fi
 
-run "su wine -c \"winetricks ${WINETRICKS:-good}\""
+info "booting wine"
+## skip MONO install on init
+#su wine -c "WINEDLLOVERRIDES=\"mscoree=\" wineboot"
+run su wine -c wineboot
+run "su wine -c \"winetricks ${WINETRICKS}\""
 
 exec "$@"

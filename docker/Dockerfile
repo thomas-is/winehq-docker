@@ -2,9 +2,8 @@ ARG DEBIAN="bullseye"
 FROM i386/debian:$DEBIAN-slim
 
 ENV USER_ID    1000
-ENV AUDIO_GID  29
 ENV VIDEO_GID  44
-ENV WINETRICKS ""
+ENV WINETRICKS "isolate_home"
 
 RUN apt-get update -y && apt-get upgrade -y && apt-get install -y \
   cabextract \
