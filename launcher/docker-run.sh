@@ -29,5 +29,6 @@ docker run --rm -it \
   -v $ROOT_DIR/user:/home/wine/user \
   -v $ROOT_DIR/wineprefix:/home/wine/.wine \
   -w /home/wine/app \
+  -e WINEDLLOVERRIDES="$WINEDLLOVERRIDES" \
   0lfi/wine:${WINE_DOCKER:-latest} \
   bash -c "su wine -p -c \"wine $RUN_EXE"\"
