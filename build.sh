@@ -21,5 +21,11 @@ do
   echo
   printf "Pushing $REPO/wine:$WINE ($DEBIAN-slim)"
   docker push $REPO/wine:$WINE
+  if [ "$DEBIAN" = "testing" ] ; then
+    echo
+    printf "Pushing $REPO/wine:latest ($DEBIAN-slim)"
+    docker tag $REPO/wine:$WINE $REPO/wine:latest
+    docker push $REPO/wine:latest
+  fi
 done
 
