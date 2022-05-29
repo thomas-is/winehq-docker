@@ -10,6 +10,10 @@ BLU="\033[1;34m"
 
 info() {
   ARG="$@"
+  printf "[${BLU}entrypoint$RST] ${BLU}$ARG$RST\n"
+}
+ok() {
+  ARG="$@"
   printf "[${BLU}entrypoint$RST] ${GRN}$ARG$RST\n"
 }
 warn() {
@@ -21,7 +25,7 @@ run() {
   printf "[${BLU}entrypoint$RST] $GRY$CMD$RST\n"
   eval $CMD
 }
-info "starting $(realpath $0)"
+info "$(realpath $0)"
 run export WINEARCH="win32"
 run groupmod -g $VIDEO_GID video
 run usermod wine -u $USER_ID
@@ -33,14 +37,14 @@ run chown wine:wine /home/wine/.wine
 LINK="/home/wine/.wine/drive_c/users/wine"
 TARGET="/home/wine/user"
 if [ -d "$TARGET" ] ; then
-  info "found $TARGET"
+  ok "found $TARGET"
   warn "forcing symlink to $LINK"
   run rm -rf $LINK
   run mkdir -p $( dirname $LINK )
   run ln -s "$TARGET" "$LINK"
 fi
 
-info "booting wine"
+ok "booting wine"
 ## skip MONO install on init
 #su wine -c "WINEDLLOVERRIDES=\"mscoree=\" wineboot"
 run su wine -c wineboot
