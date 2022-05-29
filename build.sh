@@ -18,6 +18,8 @@ do
   printf "$REPO/wine:$WINE\n"
   echo
   docker build --build-arg DEBIAN=$DEBIAN -t 0lfi/wine:$WINE ./docker
+  echo
+  printf "Pushing $REPO/wine:$WINE ($DEBIAN-slim)"
   docker push $REPO/wine:$WINE
 done
 
