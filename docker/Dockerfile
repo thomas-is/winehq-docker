@@ -1,4 +1,4 @@
-ARG DEBIAN="bullseye"
+ARG DEBIAN="testing"
 FROM i386/debian:$DEBIAN-slim
 
 ENV USER_ID    1000
