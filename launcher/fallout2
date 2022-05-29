@@ -3,7 +3,6 @@
 WINE_DOCKER="6.0.3"
 ROOT_DIR="/home/thomas/games/fallout2"
 RUN_EXE="FALLOUT2.EXE"
-## csmt=off seems to improve stability, still crashes thought:
 WINETRICKS="vd=1280x1024"
 WINEDLLOVERRIDES="ddraw.dll=n"
 
