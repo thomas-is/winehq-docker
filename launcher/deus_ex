@@ -1,0 +1,7 @@
+#!/bin/bash
+
+WINE_DOCKER="6.0.3"
+ROOT_DIR="/home/thomas/games/deus_ex"
+RUN_EXE="System/DeusEx.exe"
+
+. $(dirname $(realpath $0) )/docker-run.sh
