@@ -1,0 +1,9 @@
+#!/bin/bash
+
+WINE_DOCKER="6.0.3"
+ROOT_DIR="/home/thomas/games/nfsu2"
+RUN_EXE="SPEED2.EXE"
+## csmt=off seems to improve stability, still crashes thought:
+WINETRICKS="isolate_home csmt=off vd=1280x1024"
+
+. $(dirname $(realpath $0) )/docker-run.sh
