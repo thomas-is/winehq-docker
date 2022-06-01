@@ -5,9 +5,11 @@ if [ ! -d "$ROOT_DIR" ] ; then
   exit 1
 fi
 
+CMD="bash -l"
 if [ ! -f "$ROOT_DIR/app/$RUN_EXE" ] ; then
-  echo "RUN_EXE '$RUN_EXE' is missing!"
-  exit 1
+  echo "RUN_EXE '$RUN_EXE' not found, defaulting to bash"
+else
+  CMD="su wine -p -c \"wine $RUN_EXE\""
 fi
 
 docker run --rm -it \
@@ -31,4 +33,4 @@ docker run --rm -it \
   -w /home/wine/app \
   -e WINEDLLOVERRIDES="$WINEDLLOVERRIDES" \
   0lfi/wine:${WINE_DOCKER:-latest} \
-  bash -c "su wine -p -c \"wine $RUN_EXE"\"
+  bash -c "$CMD"
