@@ -1,15 +1,16 @@
 #!/bin/bash
 
 if [ ! -d "$ROOT_DIR" ] ; then
-  echo "ROOT_DIR '$ROOT_DIR' is missing!"
-  exit 1
+  echo "[warn] ROOT_DIR '$ROOT_DIR' is missing!"
+  ROOT_DIR="$HOME/wine-docker"
+  mkdir -p "$ROOT_DIR/app"
+  echo "[info] defaulting to $ROOT_DIR"
 fi
 
-CMD="bash -l"
+CMD="su wine -p -c \"wine $RUN_EXE\""
 if [ ! -f "$ROOT_DIR/app/$RUN_EXE" ] ; then
   echo "RUN_EXE '$RUN_EXE' not found, defaulting to bash"
-else
-  CMD="su wine -p -c \"wine $RUN_EXE\""
+  CMD="su wine -p -c \"bash -l\""
 fi
 
 docker run --rm -it \
