@@ -38,15 +38,17 @@ run groupmod -g $VIDEO_GID video
 run usermod wine -u $USER_ID
 run usermod -a -G video  wine
 run chown wine:wine /home/wine
-wineRun mkdir -p /home/wine/.wine
+run mkdir -p /home/wine/.wine/drive_c
+run chown -R wine:wine /home/wine/.wine
 
 LINK="/home/wine/.wine/drive_c/users/wine"
 TARGET="/home/wine/user"
 if [ -d "$TARGET" ] ; then
   ok "found $TARGET"
   warn "forcing symlink to $LINK"
-  wineRun rm -rf $LINK
-  wineRun mkdir -p $( dirname $LINK )
+  run rm -rf $LINK
+  run mkdir -p $( dirname $LINK )
+  run chown -R wine:wine $( dirname $LINK )
   wineRun ln -s "$TARGET" "$LINK"
 fi
 
