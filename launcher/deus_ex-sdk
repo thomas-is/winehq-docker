@@ -3,6 +3,6 @@
 WINE_DOCKER="6.0.3"
 ROOT_DIR="/home/thomas/games/deus_ex"
 RUN_EXE="System/UnrealEd.exe"
-WINETRICKS="vb5run" # needed by the SDK
+WINETRICKS="isolate_home vb5run" # needed by the SDK
 
 . $(dirname $(realpath $0) )/docker-run.sh

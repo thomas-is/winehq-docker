@@ -3,6 +3,6 @@
 WINE_DOCKER="6.0.3"
 ROOT_DIR="/home/thomas/games/hmbm"
 RUN_EXE="HitmanBloodMoney.exe"
-WINETRICKS="d3dx9"
+WINETRICKS="isolate_home d3dx9"
 
 . $(dirname $(realpath $0) )/docker-run.sh

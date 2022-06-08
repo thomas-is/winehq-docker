@@ -3,5 +3,6 @@
 WINE_DOCKER="6.0.3"
 ROOT_DIR="/home/thomas/games/ftl"
 RUN_EXE="FTLGame.exe"
+WINETRICKS="isolate_home"
 
 . $(dirname $(realpath $0) )/docker-run.sh
