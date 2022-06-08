@@ -24,6 +24,7 @@ docker run --rm -it \
   -e PULSE_SERVER=unix:/pulse \
   -v /run/user/$(id -u)/pulse/native:/pulse \
   -v $ROOT_DIR/app:/home/wine/app \
+  -v $ROOT_DIR/install:/home/wine/install \
   -v $ROOT_DIR/user:/home/wine/user \
   -v $ROOT_DIR/wineprefix:/home/wine/.wine \
   -w /home/wine/app \

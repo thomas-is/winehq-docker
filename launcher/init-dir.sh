@@ -6,5 +6,6 @@ if [ ! -d "$ROOT_DIR" ] ; then
 fi
 
 mkdir -p "$ROOT_DIR/app"
+mkdir -p "$ROOT_DIR/install"
 mkdir -p "$ROOT_DIR/user"
 mkdir -p "$ROOT_DIR/wineprefix"
