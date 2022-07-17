@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ROOT_DIR="/home/thomas/games/$1"
-WINETRICKS="vd=1280x1024"
+WINETRICKS=""
 WINEDLLOVERRIDES=""
 . ./launcher/init-dir.sh
 
