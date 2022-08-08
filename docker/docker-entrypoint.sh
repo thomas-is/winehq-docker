@@ -53,13 +53,9 @@ if [ -d "$TARGET" ] ; then
   ok "found $TARGET"
   warn "forcing symlink to $LINK"
   run rm -rf $LINK
-  ls -al /home/wine/.wine/drive_c/users
   run mkdir -p $( dirname $LINK )
-  ls -al /home/wine/.wine/drive_c/users
   run chown -R wine:wine $( dirname $LINK )
-  ls -al /home/wine/.wine/drive_c/users
   wineRun ln -s "$TARGET" "$LINK"
-  ls -al /home/wine/.wine/drive_c/users
 fi
 
 exec "$@"
