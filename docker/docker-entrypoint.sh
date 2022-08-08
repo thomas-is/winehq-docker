@@ -42,20 +42,24 @@ run mkdir -p /home/wine/.wine/drive_c
 run chown -R wine:wine /home/wine/.wine
 
 LINK="/home/wine/.wine/drive_c/users/wine"
-TARGET="/home/wine/user"
-if [ -d "$TARGET" ] ; then
-  ok "found $TARGET"
-  warn "forcing symlink to $LINK"
-  run rm -rf $LINK
-  run mkdir -p $( dirname $LINK )
-  run chown -R wine:wine $( dirname $LINK )
-  wineRun ln -s "$TARGET" "$LINK"
-fi
-
 ok "booting wine"
 ## skip MONO install on init
 #su wine -c "WINEDLLOVERRIDES=\"mscoree=\" wineboot"
 wineRun wineboot
 wineRun winetricks ${WINETRICKS}
+
+TARGET="/home/wine/user"
+if [ -d "$TARGET" ] ; then
+  ok "found $TARGET"
+  warn "forcing symlink to $LINK"
+  run rm -rf $LINK
+  ls -al /home/wine/.wine/drive_c/users
+  run mkdir -p $( dirname $LINK )
+  ls -al /home/wine/.wine/drive_c/users
+  run chown -R wine:wine $( dirname $LINK )
+  ls -al /home/wine/.wine/drive_c/users
+  wineRun ln -s "$TARGET" "$LINK"
+  ls -al /home/wine/.wine/drive_c/users
+fi
 
 exec "$@"
