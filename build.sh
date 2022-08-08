@@ -3,6 +3,7 @@
 BASE_DIR=$( realpath $( dirname $0 ))
 
 REPO="0lfi"
+DEBIAN_TESTING="bookworm"
 
 for DEBIAN in $( cat $BASE_DIR/debian | grep -v \# )
 do
@@ -21,7 +22,7 @@ do
   echo
   printf "Pushing $REPO/wine:$WINE ($DEBIAN-slim)"
   docker push $REPO/wine:$WINE
-  if [ "$DEBIAN" = "testing" ] ; then
+  if [ "$DEBIAN" = "$DEBIAN_TESTING" ] ; then
     echo
     printf "Pushing $REPO/wine:latest ($DEBIAN-slim)"
     docker tag $REPO/wine:$WINE $REPO/wine:latest
