@@ -15,6 +15,7 @@ docker run --rm -it \
   --ipc="host" \
   -e USER_ID=$(id -u) \
   -e VIDEO_GID=$(  cat /etc/group | grep video  | cut -f3 -d":" ) \
+  -e INPUT_GID=$(  cat /etc/group | grep input | cut -f3 -d":" ) \
   -e WINETRICKS="${WINETRICKS:-isolate_home}" \
   -e WINEDLLOVERRIDES="$WINEDLLOVERRIDES" \
   -e HOME=/home/wine \

@@ -34,9 +34,11 @@ wineRun() {
 
 info "$(realpath $0)"
 run export WINEARCH="win32"
-run groupmod -g $VIDEO_GID video
+#run groupmod -g $VIDEO_GID video
+#run groupmod -g $INPUT_GID input
 run usermod wine -u $USER_ID
-run usermod -a -G video  wine
+run usermod -a -G $VIDEO_GID wine
+run usermod -a -G $INPUT_GID wine
 run chown wine:wine /home/wine
 run mkdir -p /home/wine/.wine/drive_c
 run chown -R wine:wine /home/wine/.wine

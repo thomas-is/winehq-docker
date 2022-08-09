@@ -3,6 +3,7 @@ FROM i386/debian:$DEBIAN-slim
 
 ENV USER_ID    1000
 ENV VIDEO_GID  44
+ENV INPUT_GID  104
 ENV WINETRICKS "isolate_home"
 
 RUN apt-get update -y && apt-get upgrade -y && apt-get install -y \
