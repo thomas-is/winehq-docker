@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WINE_DOCKER="6.0.3"
+WINE_DOCKER="latest"
 ROOT_DIR="/home/thomas/games/nfsu2"
 RUN_EXE="SPEED2.EXE"
 ## csmt=off seems to improve stability, still crashes thought:
