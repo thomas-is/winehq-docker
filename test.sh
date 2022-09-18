@@ -1,11 +1,12 @@
 #!/bin/bash
 
+DEBIAN="bullseye"
 ROOT_DIR="/home/thomas/games/$1"
 WINETRICKS=""
 WINEDLLOVERRIDES=""
 . ./launcher/init-dir.sh
 
-docker build -t wine ./docker
+docker build -t wine --build-arg DEBIAN=$DEBIAN ./docker
 
 docker run --rm -it \
   --name wine \
