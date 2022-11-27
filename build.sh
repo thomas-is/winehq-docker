@@ -5,8 +5,7 @@ BASE_DIR=$( realpath $( dirname $0 ))
 REPO="0lfi"
 DEBIAN_TESTING="bookworm"
 
-for DEBIAN in $( cat $BASE_DIR/debian | grep -v \# )
-do
+build() {
   echo
   printf "Using $DEBIAN-slim to build "
   WINE=$( docker run --rm -it i386/debian:$DEBIAN-slim \
@@ -28,5 +27,16 @@ do
     docker tag $REPO/wine:$WINE $REPO/wine:latest
     docker push $REPO/wine:latest
   fi
+}
+
+if [ $# -eq 1 ] ; then
+  DEBIAN="$1"
+  build
+  exit 0
+fi
+
+for DEBIAN in $( cat $BASE_DIR/debian | grep -v \# )
+do
+  build
 done
 
