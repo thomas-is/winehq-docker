@@ -3,6 +3,6 @@
 WINE_DOCKER="6.0.3"
 ROOT_DIR="/home/thomas/games/vtmb"
 RUN_EXE="Vampire.exe -game Unofficial_Patch"
-WINETRICKS="isolate_home"
+WINETRICKS="isolate_home vd=1920x1080 d3dx9_41"
 
 . $(dirname $(realpath $0) )/docker-run.sh
