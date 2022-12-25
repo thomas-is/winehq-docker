@@ -1,0 +1,8 @@
+#!/bin/bash
+
+WINE_DOCKER="6.0.3"
+ROOT_DIR="/home/thomas/games/gtavc"
+RUN_EXE="gta-vc.exe"
+WINETRICKS="isolate_home vd=1920x1080" # d3dx9_41"
+
+. $(dirname $(realpath $0) )/docker-run.sh
