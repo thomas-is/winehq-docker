@@ -7,11 +7,11 @@ if [ ! -d "$ROOT_DIR" ] ; then
   echo "[info] defaulting to $ROOT_DIR"
 fi
 
-#CMD="su wine -p -c \"wine $RUN_EXE\""
-#if [ ! -f "$ROOT_DIR/app/$RUN_EXE" ] ; then
-#  echo "RUN_EXE '$RUN_EXE' not found, defaulting to bash"
+CMD="su wine -p -c \"wine $RUN_EXE\""
+if [ "$RUN_EXE" = "" ] ; then
+  echo "No RUN_EXE, defaulting to bash"
   CMD="su wine -p -c \"bash -l\""
-#fi
+fi
 
 docker run --rm -it \
   --name wine \
