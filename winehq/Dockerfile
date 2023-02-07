@@ -9,14 +9,7 @@ RUN apt-get update \
 
 
 ARG DEBIAN=bookworm
-FROM i386/debian:$DEBIAN-slim
-
-ARG DEBIAN=bookworm
-ARG WINEHQ=devel
-ENV USER_ID         1000
-ENV VIDEO_GID       44
-ENV INPUT_GID       104
-ENV WINETRICKS      "isolate_home"
+FROM i386/debian:$DEBIAN-slim AS base
 
 RUN apt-get update \
   && apt-get install -y \
@@ -30,26 +23,33 @@ RUN apt-get update \
     vulkan-tools \
     wget
 
-RUN useradd wine -d /home/wine \
+
+ARG DEBIAN=bookworm
+FROM base
+
+ARG DEBIAN=bookworm
+ARG WINEHQ=devel
+ENV USER_ID    1000
+ENV VIDEO_GID  44
+ENV INPUT_GID  104
+ENV WINETRICKS "isolate_home"
+
+ADD https://dl.winehq.org/wine-builds/winehq.key /usr/share/keyrings/winehq.key
+RUN cat /usr/share/keyrings/winehq.key | gpg --dearmor > /usr/share/keyrings/winehq.gpg \
+  && echo "deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ ${DEBIAN} main" > /etc/apt/sources.list.d/winehq.list \
+  && apt-get update \
+  && apt-get install -y --install-recommends winehq-$WINEHQ \
+  && rm -rf /var/lib/apt/lists/* \
+  && useradd wine -d /home/wine \
   && mkdir -p /home/wine/.wine \
   && chown -R wine:wine /home/wine \
   && mkdir -p /etc/sudoers.d \
   && echo "wine ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/wine
 
-ADD https://dl.winehq.org/wine-builds/winehq.key /usr/share/keyrings/winehq.key
-RUN cat /usr/share/keyrings/winehq.key | gpg --dearmor > /usr/share/keyrings/winehq.gpg \
-  && echo "deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ ${DEBIAN} main" > /etc/apt/sources.list.d/winehq.list
-
-RUN apt-get update \
-  && apt-get install -y --install-recommends winehq-$WINEHQ \
-  && rm -rf /var/lib/apt/lists/*
-
-ADD https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks /usr/bin/winetricks
-RUN chmod 755 /usr/bin/winetricks
-
+ADD https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks /usr/local/bin/winetricks
+COPY --from=builder /src/pe-set-laa /usr/local/bin/pe-set-laa
 COPY profile /etc/profile
 COPY ./docker-entrypoint.sh  /usr/local/bin/
-COPY --from=builder /src/pe-set-laa /usr/local/bin/pe-set-laa
 RUN chmod -R 755 /usr/local/bin
 
 WORKDIR /home/wine
