@@ -53,11 +53,16 @@ wineRun winetricks ${WINETRICKS}
 TARGET="/home/wine/user"
 if [ -d "$TARGET" ] ; then
   ok "found $TARGET"
-  warn "forcing symlink to $LINK"
+  warn "forcing symlink $LINK > $TARGET"
   run rm -rf $LINK
   run mkdir -p $( dirname $LINK )
   run chown -R wine:wine $( dirname $LINK )
   wineRun ln -s "$TARGET" "$LINK"
+fi
+
+if [ "$SET_LAA" != "" ] ; then
+  warn "patch $SET_LAA"
+  wineRun /usr/local/bin/pe-set-laa /home/wine/app/$SET_LAA
 fi
 
 exec "$@"

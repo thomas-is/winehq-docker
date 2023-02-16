@@ -23,6 +23,7 @@ docker run --rm -it \
   -e VIDEO_GID=$(  cat /etc/group | grep video | cut -f3 -d":" ) \
   -e INPUT_GID=$(  cat /etc/group | grep input | cut -f3 -d":" ) \
   -e WINETRICKS="${WINETRICKS:-isolate_home}" \
+  -e SET_LAA="${SET_LAA}" \
   -e HOME=/home/wine \
   -e DISPLAY=unix$DISPLAY \
   -v /tmp/.X11-unix:/tmp/.X11-unix \

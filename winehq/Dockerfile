@@ -33,6 +33,7 @@ ENV USER_ID    1000
 ENV VIDEO_GID  44
 ENV INPUT_GID  104
 ENV WINETRICKS "isolate_home"
+ENV SET_LAA    ""
 
 ADD https://dl.winehq.org/wine-builds/winehq.key /usr/share/keyrings/winehq.key
 RUN cat /usr/share/keyrings/winehq.key | gpg --dearmor > /usr/share/keyrings/winehq.gpg \
