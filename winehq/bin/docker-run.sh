@@ -1,16 +1,19 @@
 #!/bin/bash
 
 if [ ! -d "$ROOT_DIR" ] ; then
-  echo "[warn] ROOT_DIR '$ROOT_DIR' is missing!"
-  ROOT_DIR="$HOME/wine-docker"
-  mkdir -p "$ROOT_DIR/app"
-  echo "[info] defaulting to $ROOT_DIR"
+  echo "'$ROOT_DIR' ROOT_DIR not found!"
+  exit 1
 fi
 
-CMD="su wine -p -c \"wine $RUN_EXE\""
+mkdir -p "$ROOT_DIR/app"
+mkdir -p "$ROOT_DIR/install"
+mkdir -p "$ROOT_DIR/user"
+mkdir -p "$ROOT_DIR/wineprefix"
+
+CMD="wine $RUN_EXE"
 if [ "$RUN_EXE" = "" ] ; then
   echo "No RUN_EXE, defaulting to bash"
-  CMD="su wine -p -c \"bash -l\""
+  CMD="bash -l"
 fi
 
 docker run --rm -it \
@@ -20,8 +23,8 @@ docker run --rm -it \
   --hostname $( hostname ) \
   --ipc="host" \
   -e USER_ID=$(id -u) \
-  -e VIDEO_GID=$(  cat /etc/group | grep video | cut -f3 -d":" ) \
-  -e INPUT_GID=$(  cat /etc/group | grep input | cut -f3 -d":" ) \
+  -e VIDEO_GID=$( cat /etc/group | grep video | cut -f3 -d":" ) \
+  -e INPUT_GID=$( cat /etc/group | grep input | cut -f3 -d":" ) \
   -e WINETRICKS="${WINETRICKS:-isolate_home}" \
   -e SET_LAA="${SET_LAA}" \
   -e HOME=/home/wine \
@@ -37,4 +40,4 @@ docker run --rm -it \
   -w /home/wine/app \
   -e WINEDLLOVERRIDES="$WINEDLLOVERRIDES" \
   0lfi/winehq:${WINE_DOCKER:-latest} \
-  bash -c "$CMD"
+  bash -c "su wine -p -c \"$CMD\""
