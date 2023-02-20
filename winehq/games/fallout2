@@ -1,9 +1,9 @@
 #!/bin/bash
 
-WINE_DOCKER="6.0.3"
+WINEHQ="latest"
 ROOT_DIR="/home/thomas/games/fallout2"
 RUN_EXE="FALLOUT2.EXE"
 WINETRICKS="isolate_home"
 WINEDLLOVERRIDES="ddraw.dll=n"
 
-. $(dirname $(realpath $0) )/docker-run.sh
+. $(dirname $(realpath $0))/shared/docker-run
