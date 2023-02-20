@@ -1,7 +1,7 @@
 #!/bin/bash
 
 WINEHQ="latest"
-ROOT_DIR="/home/thomas/games/vtmb-winehq"
+ROOT_DIR="/home/thomas/games/vtmb"
 RUN_EXE="Vampire.exe -game Unofficial_Patch -console"
 WINETRICKS="isolate_home vd=1920x1080 d3dx9_41 renderer=gl videomemorysize=1024"
 SET_LAA="Vampire.exe"

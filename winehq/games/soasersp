@@ -1,0 +1,9 @@
+#!/bin/bash
+
+WINEHQ="latest"
+ROOT_DIR="/home/thomas/games/soasersp"
+RUN_EXE="soasersp.exe"
+WINETRICKS="isolate_home d3dx9_41"
+SET_LAA="soasersp.exe"
+
+. $(dirname $(realpath $0))/shared/docker-run
