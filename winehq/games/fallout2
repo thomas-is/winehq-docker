@@ -3,7 +3,7 @@
 WINEHQ="latest"
 ROOT_DIR="/home/thomas/games/fallout2"
 RUN_EXE="FALLOUT2.EXE"
-WINETRICKS="isolate_home"
+WINETRICKS=""
 WINEDLLOVERRIDES="ddraw.dll=n"
 
 . $(dirname $(realpath $0))/shared/docker-run

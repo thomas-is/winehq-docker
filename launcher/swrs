@@ -1,8 +1,0 @@
-#!/bin/bash
-
-WINE_DOCKER="bullseye"
-ROOT_DIR="/home/thomas/games/swrs"
-RUN_EXE="Rogue Squadron.EXE"
-WINETRICKS="isolate_home"
-
-. $(dirname $(realpath $0) )/docker-run.sh
