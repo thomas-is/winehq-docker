@@ -28,12 +28,7 @@ ARG DEBIAN=bookworm
 FROM base
 
 ARG DEBIAN=bookworm
-ARG WINEHQ=devel
-ENV USER_ID    1000
-ENV VIDEO_GID  44
-ENV INPUT_GID  104
-ENV WINETRICKS "isolate_home"
-ENV SET_LAA    ""
+ARG WINEHQ=staging
 
 ADD https://dl.winehq.org/wine-builds/winehq.key /usr/share/keyrings/winehq.key
 RUN cat /usr/share/keyrings/winehq.key | gpg --dearmor > /usr/share/keyrings/winehq.gpg \
@@ -46,7 +41,6 @@ RUN cat /usr/share/keyrings/winehq.key | gpg --dearmor > /usr/share/keyrings/win
   && chown -R wine:wine /home/wine \
   && mkdir -p /etc/sudoers.d \
   && echo "wine ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/wine
-
 ADD https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks /usr/local/bin/winetricks
 COPY --from=builder /src/pe-set-laa /usr/local/bin/pe-set-laa
 COPY profile /etc/profile
@@ -54,6 +48,12 @@ COPY ./docker-entrypoint.sh  /usr/local/bin/
 RUN chmod -R 755 /usr/local/bin
 
 WORKDIR /home/wine
+
+ENV USER_ID    1000
+ENV VIDEO_GID  44
+ENV INPUT_GID  104
+ENV WINETRICKS ""
+ENV SET_LAA    ""
 
 ENTRYPOINT [ "/usr/local/bin/docker-entrypoint.sh" ]
 CMD [ "su", "wine", "-p", "-c", "/bin/bash -l" ]

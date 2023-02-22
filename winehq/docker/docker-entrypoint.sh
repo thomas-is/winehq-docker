@@ -32,7 +32,7 @@ wineRun() {
   eval $CMD
 }
 
-info "$(realpath $0)"
+ok "$( wine --version )"
 run export WINEARCH="win32"
 run groupmod -g $VIDEO_GID video
 run groupmod -g $INPUT_GID input
@@ -48,7 +48,7 @@ ok "booting wine"
 ## skip MONO install on init
 #su wine -c "WINEDLLOVERRIDES=\"mscoree=\" wineboot"
 wineRun wineboot
-wineRun winetricks ${WINETRICKS}
+wineRun winetricks isolate_home ${WINETRICKS}
 
 TARGET="/home/wine/user"
 if [ -d "$TARGET" ] ; then
