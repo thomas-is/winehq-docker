@@ -4,7 +4,7 @@ FROM i386/debian:$DEBIAN-slim AS builder
 WORKDIR /src
 ADD https://raw.githubusercontent.com/randomstuff/pe-set-laa/master/pe-set-laa.c /src/pe-set-laa.c
 RUN apt-get update \
-  && apt-get install -y build-essential \
+  && apt-get install -y gcc \
   && gcc pe-set-laa.c -o pe-set-laa
 
 
