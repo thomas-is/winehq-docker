@@ -1,0 +1,8 @@
+#!/bin/bash
+
+WINEHQ="latest"
+ROOT_DIR="/home/thomas/games/ftl"
+RUN_EXE="FTLGame.exe"
+WINETRICKS=""
+
+. $(dirname $(realpath $0))/shared/docker-run

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+WINEHQ="latest"
+ROOT_DIR="/home/thomas/games/gtavc"
+RUN_EXE="gta-vc.exe"
+WINETRICKS="win7 vd=1920x1080"
+
+. $(dirname $(realpath $0))/shared/docker-run
