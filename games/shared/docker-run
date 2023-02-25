@@ -1,10 +1,13 @@
 #!/bin/bash
 
+CACHE="~/.cache/winehq-docker"
+
 if [ ! -d "$ROOT_DIR" ] ; then
   echo "'$ROOT_DIR' ROOT_DIR not found!"
   exit 1
 fi
 
+mkdir -p "$CACHE"
 mkdir -p "$ROOT_DIR/app"
 mkdir -p "$ROOT_DIR/install"
 mkdir -p "$ROOT_DIR/user"
@@ -33,11 +36,12 @@ docker run --rm -it \
   -v $HOME/.Xauthority:/home/wine/.Xauthority:ro \
   -e PULSE_SERVER=unix:/pulse \
   -v /run/user/$(id -u)/pulse/native:/pulse \
+  -v $CACHE:/home/wine/.cache \
   -v $ROOT_DIR/app:/home/wine/app \
   -v $ROOT_DIR/install:/home/wine/install \
   -v $ROOT_DIR/user:/home/wine/user \
   -v $ROOT_DIR/wineprefix:/home/wine/.wine \
   -w /home/wine/app \
   -e WINEDLLOVERRIDES="$WINEDLLOVERRIDES" \
-  0lfi/winehq:${WINE_DOCKER:-latest} \
+  0lfi/winehq:${WINEHQ:-latest} \
   bash -c "su wine -p -c \"$CMD\""
