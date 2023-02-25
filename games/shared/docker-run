@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CACHE="~/.cache/winehq-docker"
+CACHE="$HOME/.cache/winehq-docker"
 
 if [ ! -d "$ROOT_DIR" ] ; then
   echo "'$ROOT_DIR' ROOT_DIR not found!"
