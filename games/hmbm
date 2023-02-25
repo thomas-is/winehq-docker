@@ -1,0 +1,9 @@
+#!/bin/bash
+
+WINEHQ="latest"
+ROOT_DIR="/home/thomas/games/hmbm"
+RUN_EXE="HitmanBloodMoney.exe"
+WINETRICKS="vd=1920x1080 d3dx9"
+SET_LAA="HitmanBloodMoney.exe"
+
+. $(dirname $(realpath $0))/shared/docker-run
