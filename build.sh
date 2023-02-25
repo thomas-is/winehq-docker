@@ -1,42 +1,47 @@
 #!/bin/bash
 
-BASE_DIR=$( realpath $( dirname $0 ))
+BASE=$( realpath $( dirname $0 ) )
+. $BASE/include.sh
 
-REPO="0lfi"
-DEBIAN_TESTING="bookworm"
-
-build() {
-  echo
-  printf "Using $DEBIAN-slim to build "
-  WINE=$( docker run --rm -it i386/debian:$DEBIAN-slim \
-    bash -c "apt-get update > /dev/null && apt-cache show wine" 2> /dev/null \
-    | grep Version \
-    | sed 's/^Version: //g' \
-    | cut -f1 -d'-' \
-    | sed 's/~.*//g' \
-    | tr -d '\r' )
-  printf "$REPO/wine:$WINE\n"
-  echo
-  docker build --build-arg DEBIAN=$DEBIAN -t 0lfi/wine:$WINE ./docker
-  echo
-  printf "Pushing $REPO/wine:$WINE ($DEBIAN-slim)"
-  docker push $REPO/wine:$WINE
-  if [ "$DEBIAN" = "$DEBIAN_TESTING" ] ; then
-    echo
-    printf "Pushing $REPO/wine:latest ($DEBIAN-slim)"
-    docker tag $REPO/wine:$WINE $REPO/wine:latest
-    docker push $REPO/wine:latest
-  fi
+usage() {
+  echo "Usage: $0 [winehq branch] [debian codename]"
+  exit 1
 }
 
-if [ $# -eq 1 ] ; then
-  DEBIAN="$1"
-  build
-  exit 0
+
+FLAVOR=${1:-staging}
+DEBIAN=${2:-$TESTING}
+
+if [ "$( echo -e "$RELEASES" | grep ^$DEBIAN$ )" = "" ] ; then
+  echo "\"$DEBIAN\" is not a Debian codename"
+  usage
 fi
 
-for DEBIAN in $( cat $BASE_DIR/debian | grep -v \# )
-do
-  build
-done
+if [ "$( echo -e "$FLAVORS" | grep ^$FLAVOR$ )" = "" ] ; then
+  echo "\"$FLAVOR\" is not stable, staging or devel"
+  usage
+fi
+
+
+TAG="$( winehq $DEBIAN )-$FLAVOR-$DEBIAN"
+LATEST="$( latest )-staging-$TESTING"
+
+docker build \
+  --build-arg WINEHQ=$FLAVOR \
+  --build-arg DEBIAN=$DEBIAN \
+  -t $REPO:$TAG \
+  ./docker
+
+docker push 0lfi/winehq:$TAG
+
+if [ "$TAG" == "$LATEST" ] ; then
+  docker tag  $REPO:$TAG $REPO:latest
+  docker push $REPO:latest
+fi
+
+if [ "$( winehq $DEBIAN )" == "$( latest )" ] && [ "$DEBIAN" == "$TESTING" ]
+then
+  docker tag  $REPO:$TAG $REPO:$( winehq $DEBIAN )-$FLAVOR
+  docker push $REPO:$( winehq $DEBIAN )-$FLAVOR
+fi
 
