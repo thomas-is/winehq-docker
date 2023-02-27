@@ -30,7 +30,8 @@ curl -s https://dl.winehq.org/wine-builds/debian/dists/${1:-$TESTING}/main/binar
   | tail -n 1 \
   | cut -f2 -d":" \
   | cut -f1 -d"~" \
-  | tr -d " "
+  | tr -d " " \
+  | sed 's/0\.0\.0/0/g'
 }
 
 latest() {
