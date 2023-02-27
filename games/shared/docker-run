@@ -30,6 +30,7 @@ docker run --rm -it \
   -e INPUT_GID=$( cat /etc/group | grep input | cut -f3 -d":" ) \
   -e WINETRICKS="${WINETRICKS}" \
   -e SET_LAA="${SET_LAA}" \
+  -e SDL_GAMECONTROLLERCONFIG="$SDL_GAMECONTROLLERCONFIG"\
   -e HOME=/home/wine \
   -e DISPLAY=unix$DISPLAY \
   -v /tmp/.X11-unix:/tmp/.X11-unix \
