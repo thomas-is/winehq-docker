@@ -23,7 +23,7 @@ if [ "$( echo -e "$FLAVORS" | grep ^$FLAVOR$ )" = "" ] ; then
 fi
 
 
-TAG="$( winehq $DEBIAN )-$FLAVOR-$DEBIAN"
+TAG="$( winehq $DEBIAN $FLAVOR)-$FLAVOR-$DEBIAN"
 LATEST="$( latest )-staging-$TESTING"
 
 docker build \
@@ -38,10 +38,3 @@ if [ "$TAG" == "$LATEST" ] ; then
   docker tag  $REPO:$TAG $REPO:latest
   docker push $REPO:latest
 fi
-
-if [ "$( winehq $DEBIAN )" == "$( latest )" ] && [ "$DEBIAN" == "$TESTING" ]
-then
-  docker tag  $REPO:$TAG $REPO:$( winehq $DEBIAN )-$FLAVOR
-  docker push $REPO:$( winehq $DEBIAN )-$FLAVOR
-fi
-

@@ -22,8 +22,9 @@ EOF
 TESTING="$( echo -e "$RELEASES" | head -n 1 )"
 
 winehq() {
-curl -s https://dl.winehq.org/wine-builds/debian/dists/$1/main/binary-i386/Packages \
-  | grep Version \
+curl -s https://dl.winehq.org/wine-builds/debian/dists/${1:-$TESTING}/main/binary-i386/Packages \
+  | grep -A2 "Package: winehq-${2:-stable}" \
+  | grep "Version:" \
   | sort \
   | uniq \
   | tail -n 1 \
@@ -33,6 +34,6 @@ curl -s https://dl.winehq.org/wine-builds/debian/dists/$1/main/binary-i386/Packa
 }
 
 latest() {
-  winehq $TESTING
+  winehq $TESTING staging
 }
 

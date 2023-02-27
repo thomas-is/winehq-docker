@@ -3,8 +3,12 @@
 BASE=$( realpath $( dirname $0 ) )
 . $BASE/include.sh
 
-for DEBIAN in $RELEASES
+for BRANCH in $FLAVORS
 do
-  printf "%-12s %s\n" $DEBIAN $( winehq $DEBIAN )
+  echo "$BRANCH"
+  for DEBIAN in $RELEASES
+  do
+    printf "  %s-%s-%s\n" $( winehq $DEBIAN $BRANCH ) $BRANCH $DEBIAN
+  done
 done
 
