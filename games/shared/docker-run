@@ -31,7 +31,8 @@ docker run --rm -it \
   -e WINETRICKS="${WINETRICKS}" \
   -e SET_LAA="${SET_LAA}" \
   -e SDL_JOYSTICK_DEVICE="${SDL_JOYSTICK_DEVICE}" \
-  -e SDL_GAMECONTROLLERCONFIG="$SDL_GAMECONTROLLERCONFIG"\
+  -e JSCAL="${JSCAL}" \
+  -e SDL_GAMECONTROLLERCONFIG="${SDL_GAMECONTROLLERCONFIG}" \
   -e HOME=/home/wine \
   -e DISPLAY=unix$DISPLAY \
   -v /tmp/.X11-unix:/tmp/.X11-unix \

@@ -65,9 +65,9 @@ if [ "$SET_LAA" != "" ] ; then
   wineRun /usr/local/bin/pe-set-laa /home/wine/app/$SET_LAA
 fi
 
-if [ "$SDL_JOYSTICK" != "" ] && [ "$JSCAL" != "" ] ; then
-  ok "joystick on $SDL_JOYSTICK"
-  wineRun jscal -u $JSCAL $SDL_JOYSTICK
+if [ "$SDL_JOYSTICK_DEVICE" != "" ] && [ "$JSCAL" != "" ] ; then
+  ok "joystick on $SDL_JOYSTICK_DEVICE"
+  wineRun jscal -u $JSCAL $SDL_JOYSTICK_DEVICE
 fi
 
 exec "$@"
