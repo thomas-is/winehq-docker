@@ -16,6 +16,7 @@ RUN apt-get update \
     ca-certificates \
     cabextract \
     gnupg \
+    joystick \
     mesa-vulkan-drivers \
     pulseaudio \
     sudo \
@@ -52,8 +53,10 @@ WORKDIR /home/wine
 ENV USER_ID    1000
 ENV VIDEO_GID  44
 ENV INPUT_GID  104
-ENV WINETRICKS ""
 ENV SET_LAA    ""
+ENV WINETRICKS ""
+ENV JSCAL      ""
+ENV SDL_JOYSTICK_DEVICE ""
 
 ENTRYPOINT [ "/usr/local/bin/docker-entrypoint.sh" ]
 CMD [ "su", "wine", "-p", "-c", "/bin/bash -l" ]

@@ -61,8 +61,13 @@ if [ -d "$TARGET" ] ; then
 fi
 
 if [ "$SET_LAA" != "" ] ; then
-  warn "patch $SET_LAA"
+  ok "patch $SET_LAA"
   wineRun /usr/local/bin/pe-set-laa /home/wine/app/$SET_LAA
+fi
+
+if [ "$SDL_JOYSTICK" != "" ] && [ "$JSCAL" != "" ] ; then
+  ok "joystick on $SDL_JOYSTICK"
+  wineRun jscal -u $JSCAL $SDL_JOYSTICK
 fi
 
 exec "$@"
