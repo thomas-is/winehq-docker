@@ -6,6 +6,6 @@ RUN_EXE="SPEED2.EXE"
 ## csmt=off seems to improve stability, still crashes thought:
 WINETRICKS="vd=1280x1024 csmt=off"
 SET_LAA="SPEED2.EXE"
+SDL_JOYSTICK_DEVICE="/dev/input/js0"
 
-. $(dirname $(realpath $0))/shared/controller/ps2-alt
 . $(dirname $(realpath $0))/shared/docker-run
