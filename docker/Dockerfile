@@ -50,13 +50,18 @@ RUN chmod -R 755 /usr/local/bin
 
 WORKDIR /home/wine
 
-ENV USER_ID    1000
-ENV VIDEO_GID  44
-ENV INPUT_GID  104
-ENV SET_LAA    ""
-ENV WINETRICKS ""
-ENV JSCAL      ""
-ENV SDL_JOYSTICK_DEVICE ""
+ENV HOME                      "/home/wine"
+ENV DISPLAY                   "unix:0.0"
+ENV PULSE_SERVER              "unix:/pulse"
+ENV USER_ID                   1000
+ENV VIDEO_GID                 44
+ENV INPUT_GID                 104
+ENV SET_LAA                   ""
+ENV WINETRICKS                ""
+ENV WINEDLLOVERRIDES          ""
+ENV JSCAL                     ""
+ENV SDL_JOYSTICK_DEVICE       ""
+ENV SDL_GAMECONTROLLERCONFIG  ""
 
 ENTRYPOINT [ "/usr/local/bin/docker-entrypoint.sh" ]
 CMD [ "su", "wine", "-p", "-c", "/bin/bash -l" ]
