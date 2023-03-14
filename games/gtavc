@@ -2,7 +2,7 @@
 
 WINEHQ="latest"
 ROOT_DIR="/home/thomas/games/gtavc"
-#RUN_EXE="gta-vc.exe"
+RUN_EXE="gta-vc.exe"
 WINETRICKS="vd=1920x1080"
 
 . $(dirname $(realpath $0))/shared/controller/triggers
