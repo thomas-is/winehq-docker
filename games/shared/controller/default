@@ -1,0 +1,3 @@
+#!/bin/bash
+
+SDL_GAMECONTROLLERCONFIG="03000000c82d000010300000110100001172012304,8BitDo Pro 2,platform:Linux,a:b1,b:b0,x:b4,y:b3,back:b10,start:b11,guide:b12,leftshoulder:b6,rightshoulder:b7,leftstick:b13,rightstick:b14,leftx:a0,lefty:a1,rightx:a2,righty:a3,lefttrigger:b8,righttrigger:b9,dpup:h0.1,dpleft:h0.8,dpdown:h0.4,dpright:h0.2,"
