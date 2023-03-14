@@ -2,7 +2,8 @@
 
 WINEHQ="latest"
 ROOT_DIR="/home/thomas/games/swrs"
-RUN_EXE="Launch\ Star\ Wars\ -\ Rogue\ Squadron\ 3D.lnk"
-WINETRICKS="vd=1920x1080"
+#RUN_EXE="Launch\ Star\ Wars\ -\ Rogue\ Squadron\ 3D.lnk"
+WINETRICKS="win7 vd=1920x1080"
 
+. $(dirname $(realpath $0))/shared/controller/triggers
 . $(dirname $(realpath $0))/shared/docker-run
