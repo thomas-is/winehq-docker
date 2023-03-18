@@ -33,7 +33,7 @@ wineRun() {
 }
 
 ok "$( wine --version )"
-run export WINEARCH="win32"
+#run export WINEARCH="win32"
 run groupmod -g $VIDEO_GID video
 run groupmod -g $INPUT_GID input
 run usermod wine -u $USER_ID

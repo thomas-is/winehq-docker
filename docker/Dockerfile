@@ -1,5 +1,5 @@
 ARG DEBIAN=bookworm
-FROM i386/debian:$DEBIAN-slim AS builder
+FROM debian:$DEBIAN-slim AS builder
 
 WORKDIR /src
 ADD https://raw.githubusercontent.com/randomstuff/pe-set-laa/master/pe-set-laa.c /src/pe-set-laa.c
@@ -9,7 +9,7 @@ RUN apt-get update \
 
 
 ARG DEBIAN=bookworm
-FROM i386/debian:$DEBIAN-slim AS base
+FROM debian:$DEBIAN-slim AS base
 
 RUN apt-get update \
   && apt-get install -y \
@@ -34,6 +34,7 @@ ARG WINEHQ=staging
 ADD https://dl.winehq.org/wine-builds/winehq.key /usr/share/keyrings/winehq.key
 RUN cat /usr/share/keyrings/winehq.key | gpg --dearmor > /usr/share/keyrings/winehq.gpg \
   && echo "deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ ${DEBIAN} main" > /etc/apt/sources.list.d/winehq.list \
+  && dpkg --add-architecture i386 \
   && apt-get update \
   && apt-get install -y --install-recommends winehq-$WINEHQ \
   && rm -rf /var/lib/apt/lists/* \
