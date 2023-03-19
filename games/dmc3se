@@ -2,7 +2,7 @@
 
 WINEHQ="latest"
 ROOT_DIR="/home/thomas/games/dmc3se"
-RUN_EXE="DMC3SE.EXE"
+RUN="wine DMC3SE.EXE"
 WINETRICKS=""
 SET_LAA=""
 

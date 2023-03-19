@@ -2,7 +2,7 @@
 
 WINEHQ="latest"
 ROOT_DIR="/home/thomas/games/nfsu2"
-RUN_EXE="SPEED2.EXE"
+RUN="wine SPEED2.EXE"
 ## csmt=off seems to improve stability, still crashes thought:
 WINETRICKS="vd=1280x1024 csmt=off"
 SET_LAA="SPEED2.EXE"

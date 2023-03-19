@@ -2,7 +2,7 @@
 
 WINEHQ="latest"
 ROOT_DIR="/home/thomas/games/fallout2"
-RUN_EXE="FALLOUT2.EXE"
+RUN="wine FALLOUT2.EXE"
 WINETRICKS=""
 WINEDLLOVERRIDES="ddraw.dll=n"
 

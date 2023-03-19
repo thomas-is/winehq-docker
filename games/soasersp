@@ -2,7 +2,7 @@
 
 WINEHQ="latest"
 ROOT_DIR="/home/thomas/games/soasersp"
-RUN_EXE="soasersp.exe"
+RUN="wine soasersp.exe"
 WINETRICKS="d3dx9_41"
 SET_LAA="soasersp.exe"
 

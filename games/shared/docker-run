@@ -13,12 +13,6 @@ mkdir -p "$ROOT_DIR/install"
 mkdir -p "$ROOT_DIR/user"
 mkdir -p "$ROOT_DIR/wineprefix"
 
-CMD="wine $RUN_EXE"
-if [ "$RUN_EXE" = "" ] ; then
-  echo "No RUN_EXE, defaulting to bash"
-  CMD="bash -l"
-fi
-
 docker run --rm -it \
   --name wine \
   --device /dev/dri \
@@ -47,4 +41,4 @@ docker run --rm -it \
   -v $ROOT_DIR/wineprefix:/home/wine/.wine \
   -w /home/wine/app \
   0lfi/winehq:${WINEHQ:-latest} \
-  bash -c "su wine -p -c \"$CMD\""
+  bash -c "su wine -p -c \"${RUN:-bash -l}\""

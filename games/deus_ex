@@ -2,7 +2,7 @@
 
 WINEHQ="latest"
 ROOT_DIR="/home/thomas/games/deus_ex"
-RUN_EXE="System/DeusEx.exe"
+RUN="wine System/DeusEx.exe"
 WINETRICKS="d3dx9"
 
 . $(dirname $(realpath $0))/shared/docker-run

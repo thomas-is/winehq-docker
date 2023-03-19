@@ -2,7 +2,7 @@
 
 WINEHQ="latest"
 ROOT_DIR="/home/thomas/games/deus_ex"
-RUN_EXE="System/UnrealEd.exe"
+RUN="wine System/UnrealEd.exe"
 WINETRICKS="vb5run"
 
 . $(dirname $(realpath $0))/shared/docker-run
