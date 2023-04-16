@@ -1,0 +1,8 @@
+#!/bin/bash
+
+WINEHQ="latest"
+ROOT_DIR="/home/thomas/games/secondsight"
+RUN="wine secondsight.EXE"
+WINETRICKS="vd=1280x1024 d3dx9"
+
+. $(dirname $(realpath $0))/shared/docker-run
