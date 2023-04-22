@@ -1,0 +1,9 @@
+#!/bin/bash
+
+WINEHQ="latest"
+ROOT_DIR="/home/thomas/games/nwn"
+#RUN="wine bin/win32/nwtoolset"
+WINETRICKS="d3dx9"
+SET_LAA=""
+
+. $(dirname $(realpath $0))/shared/docker-run
