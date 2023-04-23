@@ -2,7 +2,7 @@
 
 WINEHQ="latest"
 ROOT_DIR="/home/thomas/games/nwn"
-#RUN="wine bin/win32/nwtoolset"
+RUN="wine bin/win32/nwtoolset"
 WINETRICKS="d3dx9"
 SET_LAA=""
 
