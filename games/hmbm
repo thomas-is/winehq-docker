@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WINEHQ="latest"
+WINEHQ="8.4-staging-bookworm"
 ROOT_DIR="/home/thomas/games/hmbm"
 RUN="wine HitmanBloodMoney.exe"
 WINETRICKS="vd=1920x1080 d3dx9"
