@@ -2,8 +2,9 @@
 
 WINEHQ="latest"
 ROOT_DIR="/home/thomas/games/nwn"
-RUN="wine bin/win32/nwtoolset"
-WINETRICKS="d3dx9 comctl32"
-SET_LAA=""
+WINEARCH="win32"
+WINETRICKS="winxp d3dx9 comctl32" #crypt32" #devenum"
+RUN="wine bin/win32/nwtoolset.exe"
+SET_LAA="bin/win32/nwtoolset.exe"
 
 . $(dirname $(realpath $0))/shared/docker-run

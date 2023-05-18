@@ -24,7 +24,8 @@ docker run --rm -it \
   -e INPUT_GID=$( cat /etc/group | grep input | cut -f3 -d":" ) \
   -e SET_LAA="${SET_LAA}" \
   -e WINETRICKS="${WINETRICKS}" \
-  -e WINEDLLOVERRIDES="$WINEDLLOVERRIDES" \
+  -e WINEARCH="${WINEARCH:-win64}" \
+  -e WINEDLLOVERRIDES="${WINEDLLOVERRIDES}" \
   -e SDL_JOYSTICK_DEVICE="${SDL_JOYSTICK_DEVICE}" \
   -e JSCAL="${JSCAL}" \
   -e SDL_GAMECONTROLLERCONFIG="${SDL_GAMECONTROLLERCONFIG}" \
