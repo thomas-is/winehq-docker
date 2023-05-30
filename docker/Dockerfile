@@ -18,11 +18,13 @@ RUN apt-get update \
     gnupg \
     joystick \
     mesa-vulkan-drivers \
+    libvulkan1:i386 \
     pulseaudio \
     sudo \
     unzip \
     vulkan-tools \
     wget
+#    libvkd3d1 \
 
 
 ARG DEBIAN=bookworm
@@ -58,6 +60,7 @@ ENV USER_ID                   1000
 ENV VIDEO_GID                 44
 ENV INPUT_GID                 104
 ENV SET_LAA                   ""
+ENV WINEARCH                  "win32"
 ENV WINETRICKS                ""
 ENV WINEDLLOVERRIDES          ""
 ENV JSCAL                     ""
