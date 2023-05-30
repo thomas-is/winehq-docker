@@ -3,7 +3,7 @@
 WINEHQ="latest"
 ROOT_DIR="/home/thomas/games/vtmb"
 RUN="wine Vampire.exe -game Unofficial_Patch -console"
-WINETRICKS="vd=1920x1080 d3dx9_41 renderer=gl videomemorysize=1024"
+WINETRICKS="vd=1920x1080 dxvk renderer=vulkan"
 SET_LAA="Vampire.exe"
 
 . $(dirname $(realpath $0))/shared/docker-run
