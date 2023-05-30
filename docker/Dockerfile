@@ -19,6 +19,7 @@ RUN dpkg --add-architecture i386 \
     gnupg \
     joystick \
     mesa-vulkan-drivers \
+    libvulkan1 \
     libvulkan1:i386 \
     pulseaudio \
     sudo \
