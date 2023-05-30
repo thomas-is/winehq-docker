@@ -34,11 +34,13 @@ wineRun() {
 
 ok "$( wine --version )"
 #run export WINEARCH="win32"
-run groupmod -g $VIDEO_GID video
-run groupmod -g $INPUT_GID input
+run groupmod -g $VIDEO_GID  video
+run groupmod -g $INPUT_GID  input
+run groupmod -g $RENDER_GID render
 run usermod wine -u $USER_ID
-run usermod -a -G $VIDEO_GID wine
-run usermod -a -G $INPUT_GID wine
+run usermod -a -G $VIDEO_GID  wine
+run usermod -a -G $INPUT_GID  wine
+run usermod -a -G $RENDER_GID wine
 run chown wine:wine /home/wine
 run mkdir -p /home/wine/.wine/drive_c
 run chown -R wine:wine /home/wine/.wine

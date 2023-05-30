@@ -11,7 +11,8 @@ RUN apt-get update \
 ARG DEBIAN=bookworm
 FROM debian:$DEBIAN-slim AS base
 
-RUN apt-get update \
+RUN dpkg --add-architecture i386 \
+  && apt-get update \
   && apt-get install -y \
     ca-certificates \
     cabextract \
@@ -59,6 +60,7 @@ ENV PULSE_SERVER              "unix:/pulse"
 ENV USER_ID                   1000
 ENV VIDEO_GID                 44
 ENV INPUT_GID                 104
+ENV RENDER_GID                105
 ENV SET_LAA                   ""
 ENV WINEARCH                  "win32"
 ENV WINETRICKS                ""

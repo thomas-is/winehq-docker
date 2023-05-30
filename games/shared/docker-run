@@ -20,8 +20,9 @@ docker run --rm -it \
   --hostname $( hostname ) \
   --ipc="host" \
   -e USER_ID=$(id -u) \
-  -e VIDEO_GID=$( cat /etc/group | grep video | cut -f3 -d":" ) \
-  -e INPUT_GID=$( cat /etc/group | grep input | cut -f3 -d":" ) \
+  -e VIDEO_GID=$(  cat /etc/group | grep video  | cut -f3 -d":" ) \
+  -e INPUT_GID=$(  cat /etc/group | grep input  | cut -f3 -d":" ) \
+  -e RENDER_GID=$( cat /etc/group | grep render | cut -f3 -d":" ) \
   -e SET_LAA="${SET_LAA}" \
   -e WINETRICKS="${WINETRICKS}" \
   -e WINEARCH="${WINEARCH:-win32}" \
