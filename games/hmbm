@@ -1,9 +1,13 @@
 #!/bin/bash
 
-WINEHQ="8.4-staging-bookworm"
+#WINEHQ="8.4-staging-bookworm"
+#WINETRICKS="vd=1920x1080 d3dx9"
+
+WINEHQ="8.0.1-stable-bookworm"
+WINETRICKS="vd=1920x1080 dxvk"
+
 ROOT_DIR="/home/thomas/games/hmbm"
 RUN="wine HitmanBloodMoney.exe"
-WINETRICKS="vd=1920x1080 d3dx9"
 SET_LAA="HitmanBloodMoney.exe"
 
 . $(dirname $(realpath $0))/shared/docker-run
