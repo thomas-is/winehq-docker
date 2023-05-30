@@ -4,7 +4,7 @@ WINEHQ="latest"
 ROOT_DIR="/home/thomas/games/dmc3se"
 RUN="wine DMC3SE.EXE"
 WINEARCH="win32"
-WINETRICKS=""
+WINETRICKS="dxvk"
 SET_LAA=""
 
 

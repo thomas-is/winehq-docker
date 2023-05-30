@@ -3,7 +3,8 @@
 WINEHQ="latest"
 ROOT_DIR="/home/thomas/games/nwn"
 WINEARCH="win32"
-WINETRICKS="winxp d3dx9 comctl32" #crypt32" #devenum"
+#WINETRICKS="winxp d3dx9 comctl32" #crypt32" #devenum"
+WINETRICKS="winxp dxvk comctl32" #crypt32" #devenum"
 RUN="wine bin/win32/nwtoolset.exe"
 SET_LAA="bin/win32/nwtoolset.exe"
 
