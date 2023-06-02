@@ -10,7 +10,7 @@ fi
 mkdir -p "$CACHE"
 mkdir -p "$ROOT_DIR/app"
 mkdir -p "$ROOT_DIR/install"
-mkdir -p "$ROOT_DIR/user"
+mkdir -p "$ROOT_DIR/users"
 mkdir -p "$ROOT_DIR/wineprefix"
 
 docker run --rm -it \
@@ -39,7 +39,7 @@ docker run --rm -it \
   -v $CACHE:/home/wine/.cache \
   -v $ROOT_DIR/app:/home/wine/app \
   -v $ROOT_DIR/install:/home/wine/install \
-  -v $ROOT_DIR/user:/home/wine/user \
+  -v $ROOT_DIR/users:/home/wine/users \
   -v $ROOT_DIR/wineprefix:/home/wine/.wine \
   -w /home/wine/app \
   0lfi/winehq:${WINEHQ:-latest} \
