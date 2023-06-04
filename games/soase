@@ -1,0 +1,10 @@
+#!/bin/bash
+
+WINEHQ="latest"
+ROOT_DIR="/home/thomas/games/soase"
+RUN="wine Sins\ of\ a\ Solar\ Empire\ Rebellion.exe"
+WINETRICKS="win7 dxvk renderer=vulkan"
+SET_LAA=""
+WINEARCH="win64"
+
+. $(dirname $(realpath $0))/shared/docker-run
