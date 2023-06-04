@@ -19,14 +19,15 @@ RUN dpkg --add-architecture i386 \
     gnupg \
     joystick \
     mesa-vulkan-drivers \
+    mesa-vulkan-drivers:i386 \
     libvulkan1 \
     libvulkan1:i386 \
     pulseaudio \
     sudo \
     unzip \
     vulkan-tools \
+    winbind \
     wget
-#    libvkd3d1 \
 
 
 ARG DEBIAN=bookworm
