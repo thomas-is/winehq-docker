@@ -3,6 +3,6 @@
 WINEHQ="latest"
 ROOT_DIR="/home/thomas/games/deus_ex"
 RUN="wine System/DeusEx.exe"
-WINETRICKS="d3dx9"
+WINETRICKS="dxvk renderer=vulkan"
 
 . $(dirname $(realpath $0))/shared/docker-run
