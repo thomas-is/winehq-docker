@@ -1,9 +1,9 @@
 #!/bin/bash
 
-WINEHQ="latest"
+WINEHQ="8.0.1-stable-bookworm"
 ROOT_DIR="/home/thomas/games/ts2"
 RUN="wine /home/wine/app/The\ Sims\ 2\ Mansion\ and\ Garden\ Stuff/TSBin/Sims2EP9.exe"
 WINETRICKS="winxp vd=1920x1080 dxvk renderer=vulkan"
-SET_LAA=""
+SET_LAA="The\ Sims\ 2\ Mansion\ and\ Garden\ Stuff/TSBin/Sims2EP9.exe"
 
 . $(dirname $(realpath $0))/shared/docker-run
