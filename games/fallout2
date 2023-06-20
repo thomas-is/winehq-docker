@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WINEHQ="latest"
+WINEHQ="8.0-stable-bookworm"
 ROOT_DIR="/home/thomas/games/fallout2"
 RUN="wine FALLOUT2.EXE"
 WINETRICKS=""
