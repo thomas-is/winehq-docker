@@ -25,16 +25,14 @@ winehq() {
 curl -s https://dl.winehq.org/wine-builds/debian/dists/${1:-$TESTING}/main/binary-i386/Packages \
   | grep -A2 "Package: winehq-${2:-stable}" \
   | grep "Version:" \
-  | sort \
+  | awk '{ print $2 }' \
+  | sort -t. -k 1,1n -k 2,2n \
   | uniq \
   | tail -n 1 \
   | cut -f2 -d":" \
-  | cut -f1 -d"~" \
-  | tr -d " " \
-  | sed 's/0\.0\.0/0/g'
+  | tr -d " "
 }
 
 latest() {
   winehq $TESTING staging
 }
-
