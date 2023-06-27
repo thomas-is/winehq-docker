@@ -3,11 +3,11 @@
 BASE=$( realpath $( dirname $0 ) )
 . $BASE/include.sh
 
-DEBIAN=${1:-$TESTING}
+BRANCH="${1:-stable}"
+DEBIAN=${2:-$TESTING}
 PACKAGES=$( curl -s https://dl.winehq.org/wine-builds/debian/dists/$DEBIAN/main/binary-i386/Packages )
 
 listVersions() {
-  BRANCH="${1:-stable}"
   echo "$PACKAGES" \
     | grep -A2 "Package: winehq-$BRANCH" \
     | grep "Version:" \
@@ -15,7 +15,8 @@ listVersions() {
     | sort -t. -k 1,1nr -k 2,2nr -k 3,3nr -k 4,4nr \
     | uniq \
     | cut -f2 -d":" \
-    | tr -d " "
+    | tr -d " " \
+    | sed "s/.*$/$BRANCH $DEBIAN &/g"
 }
 
 debianOf() {
@@ -25,12 +26,9 @@ debianOf() {
     | rev \
     | cut -f1 -d"~" \
     | rev \
-    | sed 's/-.*$//g'
+    | cut -f1 -d"-"
+#    | sed 's/-.*$//g'
 }
 
-echo > /dev/stderr
-echo "winehq-staging" > /dev/stderr
-listVersions staging
-echo > /dev/stderr
-echo "winehq-stable" > /dev/stderr
-listVersions stable
+listVersions $BRANCH
+#debianOf 7.0~rc1~bookworm-1

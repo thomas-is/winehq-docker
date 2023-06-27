@@ -11,6 +11,7 @@ usage() {
 
 FLAVOR=${1:-staging}
 DEBIAN=${2:-$TESTING}
+VERSION=$3
 
 if [ "$( echo -e "$RELEASES" | grep ^$DEBIAN$ )" = "" ] ; then
   echo "\"$DEBIAN\" is not a Debian codename"
@@ -29,8 +30,12 @@ LATEST="$( latest )-staging-$TESTING"
 docker build \
   --build-arg WINEHQ=$FLAVOR \
   --build-arg DEBIAN=$DEBIAN \
+  --build-arg VERSION=$VERSION \
   -t $REPO:$TAG \
-  ./docker
+  ./docker || exit 1
+
+
+exit 0
 
 docker push 0lfi/winehq:$TAG
 
