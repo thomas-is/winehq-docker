@@ -3,11 +3,35 @@
 BASE=$( realpath $( dirname $0 ) )
 . $BASE/include.sh
 
-BRANCH="${1:-stable}"
-DEBIAN=${2:-$TESTING}
-PACKAGES=$( curl -s https://dl.winehq.org/wine-builds/debian/dists/$DEBIAN/main/binary-i386/Packages )
+validBranch() {
+  if [ "$( printf "%s\n" "$FLAVORS" | grep $BRANCH )" = "" ]; then
+    echo "winehq \"$BRANCH\" is not a valid branch"
+    exit 1
+  fi
+}
+validDebian() {
+  if [ "$( printf "%s\n" "$RELEASES" | grep ^$DEBIAN$ )" = "" ]; then
+    echo "debian \"$DEBIAN\" is not a valid codename"
+    exit 1
+  fi
+}
+
+debianOf() {
+# expects a winehq version such as "8.0~rc5~bookworm-1"
+# returns debian codename "bookworm"
+  echo "$1" \
+    | rev \
+    | cut -f1 -d"~" \
+    | rev \
+    | cut -f1 -d"-"
+}
 
 listVersions() {
+  BRANCH="${1:-stable}"
+  DEBIAN="${2:-$TESTING}"
+  validBranch
+  validDebian
+  PACKAGES=$( curl -s https://dl.winehq.org/wine-builds/debian/dists/$DEBIAN/main/binary-i386/Packages )
   echo "$PACKAGES" \
     | grep -A2 "Package: winehq-$BRANCH" \
     | grep "Version:" \
@@ -15,20 +39,37 @@ listVersions() {
     | sort -t. -k 1,1nr -k 2,2nr -k 3,3nr -k 4,4nr \
     | uniq \
     | cut -f2 -d":" \
-    | tr -d " " \
-    | sed "s/.*$/$BRANCH $DEBIAN &/g"
+    | tr -d " "
 }
 
-debianOf() {
-# expects a version as "8.0~rc5~bookworm-1"
-# returns debian codename "bookworm"
-  echo "$1" \
-    | rev \
-    | cut -f1 -d"~" \
-    | rev \
-    | cut -f1 -d"-"
-#    | sed 's/-.*$//g'
+getImageTag() {
+  PACKAGE=$1
+  if [ "$PACKAGE" = "" ]; then
+    echo "package \"$PACKAGE\" is not a valid package"
+    exit 1
+  fi
+  DEBIAN=$( debianOf $PACKAGE )
+  validDebian
+  tag=$( getWineBranch )-$PACKAGE
+  echo $tag
 }
 
-listVersions $BRANCH
-#debianOf 7.0~rc1~bookworm-1
+getWineBranch() {
+  BRANCH=""
+  for WINEHQ in $FLAVORS; do
+    valid=$( listVersions $WINEHQ $DEBIAN | grep ^$PACKAGE$ )
+    if [ "$valid" != "" ]; then
+      BRANCH=$WINEHQ
+      break;
+    fi
+  done
+  if [ "$BRANCH" = "" ] ; then
+    echo "package \"$PACKAGE\" in debian \"$DEBIAN\" not found"
+    exit 1
+  fi
+  echo $BRANCH
+}
+
+
+#listVersions $1 $2
+getImageTag $1
