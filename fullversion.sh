@@ -50,11 +50,16 @@ getImageTag() {
   fi
   DEBIAN=$( debianOf $PACKAGE )
   validDebian
-  tag=$( getWineBranch )-$PACKAGE
+  VERSION=$( echo $PACKAGE \
+    | sed 's/-[0-9]*$//g' \
+    | sed "s/~$DEBIAN$//g" \
+  )
+  tag=$( getWineBranch )-$VERSION-$DEBIAN
   echo $tag
 }
 
 getWineBranch() {
+  # returns $FLAVOR-$VERSION-$DEBIAN
   BRANCH=""
   for WINEHQ in $FLAVORS; do
     valid=$( listVersions $WINEHQ $DEBIAN | grep ^$PACKAGE$ )
@@ -73,3 +78,4 @@ getWineBranch() {
 
 #listVersions $1 $2
 getImageTag $1
+#getImageTag "8.0~rc5~bookworm-1"
