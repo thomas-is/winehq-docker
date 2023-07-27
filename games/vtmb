@@ -3,7 +3,7 @@
 WINEHQ="8.0.1-stable-bookworm"
 ROOT_DIR="/home/thomas/games/vtmb"
 RUN="wine Vampire.exe -game Unofficial_Patch -console"
-WINETRICKS="vd=1920x1080 dxvk"
-SET_LAA="Vampire.exe"
+#WINETRICKS="vd=1920x1080 dxvk"
+#SET_LAA="Vampire.exe"
 
 . $(dirname $(realpath $0))/shared/docker-run

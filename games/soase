@@ -3,7 +3,7 @@
 WINEHQ="8.0.1-stable-bookworm"
 ROOT_DIR="/home/thomas/games/soase"
 RUN="wine Sins\ of\ a\ Solar\ Empire\ Rebellion.exe"
-WINETRICKS="win7 dxvk renderer=vulkan"
+#WINETRICKS="win7 dxvk renderer=vulkan"
 SET_LAA=""
 WINEARCH="win64"
 
