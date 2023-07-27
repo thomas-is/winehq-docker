@@ -7,11 +7,11 @@ RELEASES=$( cat << EOF
 bookworm
 bullseye
 buster
-stretch
-jessie
-wheezy
 EOF
 )
+#stretch
+#jessie
+#wheezy
 
 BRANCHES=$( cat << EOF
 stable
