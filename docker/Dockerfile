@@ -47,9 +47,12 @@ RUN cat /usr/share/keyrings/winehq.key | gpg --dearmor > /usr/share/keyrings/win
   && echo "deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ ${DEBIAN} main" > /etc/apt/sources.list.d/winehq.list \
   && dpkg --add-architecture i386 \
   && apt-get update
-RUN apt-get install -y --install-recommends winehq-$BRANCH=$PACKAGE
-#RUN apt-get install -y --install-recommends winehq-$BRANCH-i386=$PACKAGE
-#RUN apt-get install -y --install-recommends winehq-$BRANCH-amd64=$PACKAGE
+
+RUN apt-get install -y --install-recommends \
+  wine-$BRANCH=$PACKAGE \
+  wine-$BRANCH-i386=$PACKAGE \
+  wine-$BRANCH-amd64=$PACKAGE
+
 RUN rm -rf /var/lib/apt/lists/*
 ADD https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks /usr/local/bin/winetricks
 COPY --from=builder /src/pe-set-laa /usr/local/bin/pe-set-laa

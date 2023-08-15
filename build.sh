@@ -19,10 +19,10 @@ VERSION=$3
 
 if [ "$VERSION" = "" ]; then
   PACKAGE=$( latestPackage $BRANCH $DEBIAN )
-  VERSION=$( echo $PACKAGE | head -n 1 | cut -f1 -d"~")
 else
   PACKAGE=$( listPackages $BRANCH $DEBIAN | grep $VERSION | head -n 1 )
 fi
+VERSION=$( echo $PACKAGE | head -n 1 | cut -f1 -d"~")
 
 TAG="$BRANCH-$VERSION-$DEBIAN"
 LATEST="staging-$( latestPackage $FLAVOR | cut -f1 -d"~")"
@@ -40,8 +40,6 @@ docker build \
   --build-arg PACKAGE=$PACKAGE \
   -t $REPO:$TAG \
   ./docker || exit 1
-
-exit 0
 
 docker push 0lfi/winehq:$TAG
 
