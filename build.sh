@@ -25,13 +25,11 @@ fi
 VERSION=$( echo $PACKAGE | head -n 1 | cut -f1 -d"~")
 
 TAG="$BRANCH-$VERSION-$DEBIAN"
-LATEST="staging-$( latestPackage $FLAVOR | cut -f1 -d"~")"
+LATEST="stable-$( latestPackage stable $TESTING | cut -f1 -d"~")-$TESTING"
 
-echo  BRANCH=$BRANCH
-echo  DEBIAN=$DEBIAN
-echo  PACKAGE=$PACKAGE
 echo
-echo $TAG
+printf "Current: %s\n" $TAG
+printf "Latest:  %s\n" $LATEST
 echo
 
 docker build \
