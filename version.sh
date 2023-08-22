@@ -6,6 +6,4 @@ BASE=$( realpath $( dirname $0 ) )
 BRANCH="${1:-stable}"
 DEBIAN="${2:-$TESTING}"
 
-echo $BRANCH-$DEBIAN
-echo
-listPackages $BRANCH $DEBIAN
+listPackages $BRANCH $DEBIAN | sed "s/.*/$BRANCH $DEBIAN &/"
