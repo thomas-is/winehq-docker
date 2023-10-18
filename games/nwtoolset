@@ -1,10 +1,10 @@
 #!/bin/bash
 
-WINEHQ="latest"
+#WINEHQ="latest"
+WINEHQ="8.0.1-stable-bookworm"
 ROOT_DIR="/home/thomas/games/nwn"
 WINEARCH="win32"
-#WINETRICKS="winxp d3dx9 comctl32" #crypt32" #devenum"
-WINETRICKS="winxp dxvk comctl32" #crypt32" #devenum"
+#WINETRICKS="winxp dxvk comctl32" #crypt32" #devenum"
 RUN="wine bin/win32/nwtoolset.exe"
 SET_LAA="bin/win32/nwtoolset.exe"
 
