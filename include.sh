@@ -27,6 +27,7 @@ validBranch() {
     exit 1
   fi
 }
+
 validDebian() {
   if [ "$( printf "%s\n" "$RELEASES" | grep ^$DEBIAN$ )" = "" ]; then
     echo "debian \"$DEBIAN\" is not a valid codename"
@@ -34,9 +35,9 @@ validDebian() {
   fi
 }
 
-debianOf() {
 # expects a winehq version such as "8.0~rc5~bookworm-1"
 # returns debian codename "bookworm"
+debianOf() {
   echo "$1" \
     | rev \
     | cut -f1 -d"~" \

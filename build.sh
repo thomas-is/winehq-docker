@@ -8,15 +8,15 @@ usage() {
   exit 1
 }
 
-
-BRANCH=${1:-staging}
+# default wine branch is stable
+BRANCH=${1:-stable}
 validBranch
 
+# default debian is testing
 DEBIAN=${2:-$TESTING}
 validDebian
 
 VERSION=$3
-
 if [ "$VERSION" = "" ]; then
   PACKAGE=$( latestPackage $BRANCH $DEBIAN )
 else
