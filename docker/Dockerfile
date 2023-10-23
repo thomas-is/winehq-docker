@@ -1,4 +1,4 @@
-ARG DEBIAN=bookworm
+ARG DEBIAN
 FROM debian:$DEBIAN-slim AS builder
 
 WORKDIR /src
@@ -8,7 +8,7 @@ RUN apt-get update \
   && gcc pe-set-laa.c -o pe-set-laa
 
 
-ARG DEBIAN=bookworm
+ARG DEBIAN
 FROM debian:$DEBIAN-slim AS base
 
 RUN dpkg --add-architecture i386 \
@@ -22,32 +22,38 @@ RUN dpkg --add-architecture i386 \
     mesa-vulkan-drivers:i386 \
     libvulkan1 \
     libvulkan1:i386 \
+    p7zip-full \
     pulseaudio \
     sudo \
     unzip \
     vulkan-tools \
     winbind \
-    wget
-
-
-ARG DEBIAN=bookworm
-FROM base
-
-ARG DEBIAN=bookworm
-ARG WINEHQ=staging
-
-ADD https://dl.winehq.org/wine-builds/winehq.key /usr/share/keyrings/winehq.key
-RUN cat /usr/share/keyrings/winehq.key | gpg --dearmor > /usr/share/keyrings/winehq.gpg \
-  && echo "deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ ${DEBIAN} main" > /etc/apt/sources.list.d/winehq.list \
-  && dpkg --add-architecture i386 \
-  && apt-get update \
-  && apt-get install -y --install-recommends winehq-$WINEHQ \
-  && rm -rf /var/lib/apt/lists/* \
+    wget \
   && useradd wine -d /home/wine \
   && mkdir -p /home/wine/.wine \
   && chown -R wine:wine /home/wine \
   && mkdir -p /etc/sudoers.d \
   && echo "wine ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/wine
+
+ARG DEBIAN
+FROM base
+
+ARG DEBIAN
+ARG BRANCH
+ARG PACKAGE
+
+ADD https://dl.winehq.org/wine-builds/winehq.key /usr/share/keyrings/winehq.key
+RUN cat /usr/share/keyrings/winehq.key | gpg --dearmor > /usr/share/keyrings/winehq.gpg \
+  && echo "deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ ${DEBIAN} main" > /etc/apt/sources.list.d/winehq.list \
+  && dpkg --add-architecture i386 \
+  && apt-get update
+
+RUN apt-get install -y --install-recommends \
+  wine-$BRANCH=$PACKAGE \
+  wine-$BRANCH-i386=$PACKAGE \
+  wine-$BRANCH-amd64=$PACKAGE
+
+RUN rm -rf /var/lib/apt/lists/*
 ADD https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks /usr/local/bin/winetricks
 COPY --from=builder /src/pe-set-laa /usr/local/bin/pe-set-laa
 COPY profile /etc/profile

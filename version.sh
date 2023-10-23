@@ -3,12 +3,7 @@
 BASE=$( realpath $( dirname $0 ) )
 . $BASE/include.sh
 
-for BRANCH in $FLAVORS
-do
-  echo "$BRANCH"
-  for DEBIAN in $RELEASES
-  do
-    printf "  %s-%s-%s\n" $( winehq $DEBIAN $BRANCH ) $BRANCH $DEBIAN
-  done
-done
+BRANCH="${1:-stable}"
+DEBIAN="${2:-$TESTING}"
 
+listPackages $BRANCH $DEBIAN | sed "s/.*/$BRANCH $DEBIAN &/"

@@ -4,33 +4,40 @@ BASE=$( realpath $( dirname $0 ) )
 . $BASE/include.sh
 
 usage() {
-  echo "Usage: $0 [winehq branch] [debian codename]"
+  echo "Usage: $0 [branch] [debian] [package]"
   exit 1
 }
 
+# default wine branch is stable
+BRANCH=${1:-stable}
+validBranch
 
-FLAVOR=${1:-staging}
+# default debian is testing
 DEBIAN=${2:-$TESTING}
+validDebian
 
-if [ "$( echo -e "$RELEASES" | grep ^$DEBIAN$ )" = "" ] ; then
-  echo "\"$DEBIAN\" is not a Debian codename"
-  usage
+VERSION=$3
+if [ "$VERSION" = "" ]; then
+  PACKAGE=$( latestPackage $BRANCH $DEBIAN )
+else
+  PACKAGE=$( listPackages $BRANCH $DEBIAN | grep $VERSION | head -n 1 )
 fi
+VERSION=$( echo $PACKAGE | head -n 1 | cut -f1 -d"~")
 
-if [ "$( echo -e "$FLAVORS" | grep ^$FLAVOR$ )" = "" ] ; then
-  echo "\"$FLAVOR\" is not stable, staging or devel"
-  usage
-fi
+TAG="$BRANCH-$VERSION-$DEBIAN"
+LATEST="stable-$( latestPackage stable $TESTING | cut -f1 -d"~")-$TESTING"
 
-
-TAG="$( winehq $DEBIAN $FLAVOR)-$FLAVOR-$DEBIAN"
-LATEST="$( latest )-staging-$TESTING"
+echo
+printf "Current: %s\n" $TAG
+printf "Latest:  %s\n" $LATEST
+echo
 
 docker build \
-  --build-arg WINEHQ=$FLAVOR \
-  --build-arg DEBIAN=$DEBIAN \
+  --build-arg BRANCH=$BRANCH   \
+  --build-arg DEBIAN=$DEBIAN   \
+  --build-arg PACKAGE=$PACKAGE \
   -t $REPO:$TAG \
-  ./docker
+  ./docker || exit 1
 
 docker push 0lfi/winehq:$TAG
 
