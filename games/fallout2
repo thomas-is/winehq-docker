@@ -1,9 +1,9 @@
 #!/bin/bash
 
-WINEHQ="8.0-stable-bookworm"
+WINEHQ="8.0.1-stable-bookworm"
 ROOT_DIR="/home/thomas/games/fallout2"
 RUN="wine FALLOUT2.EXE"
-WINETRICKS=""
+WINETRICKS="vd=1920x1080"
 WINEDLLOVERRIDES="ddraw.dll=n"
 
 . $(dirname $(realpath $0))/shared/docker-run
