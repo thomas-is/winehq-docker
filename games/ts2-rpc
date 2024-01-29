@@ -2,7 +2,7 @@
 
 WINEHQ="8.0.1-stable-bookworm"
 ROOT_DIR="/home/thomas/games/ts2-rpc"
-RUN="wine /home/wine/app/Fun\ with\ Pets/SP9/TSBin/Sims2RPC.exe"
+RUN="wine /home/wine/app/Fun\ with\ Pets/SP9/TSBin/Sims2EP9RPC.exe"
 #WINETRICKS="winxp vd=1920x1080 dxvk renderer=vulkan"
 WINEARCH="win32"
 SET_LAA=""
