@@ -53,6 +53,8 @@ RUN apt-get install -y --install-recommends \
   wine-$BRANCH-i386=$PACKAGE \
   wine-$BRANCH-amd64=$PACKAGE
 
+RUN apt-get install -y --install-recommends winehq-$BRANCH=$PACKAGE || exit 0
+
 RUN rm -rf /var/lib/apt/lists/*
 ADD https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks /usr/local/bin/winetricks
 COPY --from=builder /src/pe-set-laa /usr/local/bin/pe-set-laa
