@@ -1,9 +1,9 @@
 #!/bin/bash
 
 WINEHQ="8.0.1-stable-bookworm"
-ROOT_DIR="/home/thomas/games/ts2"
-RUN="wine /home/wine/app/The\ Sims\ 2\ Mansion\ and\ Garden\ Stuff/CSBin/TS2BodyShop.exe"
-WINETRICKS="winxp vd=1920x1080 dxvk renderer=vulkan"
+ROOT_DIR="/home/thomas/games/ts2-rpc"
+RUN="wine /home/wine/app/Fun\ with\ Pets/SP9/CSBin/TS2BodyShop.exe"
+#WINETRICKS="winxp vd=1920x1080 dxvk renderer=vulkan"
 SET_LAA=""
 
 . $(dirname $(realpath $0))/shared/docker-run
