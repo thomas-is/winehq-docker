@@ -1,8 +1,8 @@
 #!/bin/bash
 
-WINEHQ="latest"
+WINEHQ="8.0.1-stable-bookworm"
 ROOT_DIR="/home/thomas/games/deus_ex"
 RUN="wine System/DeusEx.exe"
-WINETRICKS="dxvk renderer=vulkan"
+#WINETRICKS="dxvk renderer=vulkan"
 
 . $(dirname $(realpath $0))/shared/docker-run
