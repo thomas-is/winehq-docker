@@ -5,4 +5,7 @@ ROOT_DIR="/home/thomas/games/deus_ex"
 RUN="wine System/DeusEx.exe"
 #WINETRICKS="dxvk renderer=vulkan"
 
+xrandr -s 1440x900
 . $(dirname $(realpath $0))/shared/docker-run
+xrandr -s 1920x1080
+xgamma -gamma 1.0
