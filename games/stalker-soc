@@ -1,0 +1,10 @@
+#!/bin/bash
+
+WINEHQ="8.0.1-stable-bookworm"
+#WINETRICKS="vd=1920x1080 dxvk"
+
+ROOT_DIR="/home/thomas/games/stalker"
+RUN="wine bin/XR_3DA.exe "
+#SET_LAA=""
+
+. $(dirname $(realpath $0))/shared/docker-run
