@@ -3,7 +3,7 @@
 WINEHQ="8.0.1-stable-bookworm"
 #WINETRICKS="vd=1920x1080 dxvk"
 
-ROOT_DIR="/home/thomas/games/stalker"
+ROOT_DIR="/home/thomas/games/stalker-soc"
 RUN="wine bin/XR_3DA.exe "
 #SET_LAA=""
 
