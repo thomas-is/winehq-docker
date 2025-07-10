@@ -41,6 +41,6 @@ docker run --rm -it \
   -v $ROOT_DIR/install:/home/wine/install \
   -v $ROOT_DIR/users:/home/wine/users \
   -v $ROOT_DIR/wineprefix:/home/wine/.wine \
-  -w /home/wine/app \
+  -w /home/wine/app$APP_SUB_DIR \
   0lfi/winehq:${WINEHQ:-latest} \
   bash -c "su wine -p -c \"${RUN:-bash -l}\""
