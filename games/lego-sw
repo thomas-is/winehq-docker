@@ -1,0 +1,11 @@
+#!/bin/bash
+
+WINEHQ="stable-9.0.0.0-bookworm"
+WINETRICKS="dxvk mwo=disable"
+
+ROOT_DIR="/home/thomas/games/lego-sw"
+RUN="wine LEGOStarWarsSaga.exe"
+
+#WINEARCH="win64"
+. $(dirname $(realpath $0))/shared/controller/default
+. $(dirname $(realpath $0))/shared/docker-run
