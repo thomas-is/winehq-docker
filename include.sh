@@ -52,7 +52,7 @@ listPackages() {
   validDebian
   PACKAGES=$( curl -s https://dl.winehq.org/wine-builds/debian/dists/$DEBIAN/main/binary-i386/Packages )
   echo "$PACKAGES" \
-    | grep -A2 "Package: winehq-$BRANCH" \
+    | grep -A8 "Package: winehq-$BRANCH" \
     | grep "Version:" \
     | awk '{ print $2 }' \
     | sort -t. -k 1,1nr -k 2,2nr -k 3,3nr -k 4,4nr \
