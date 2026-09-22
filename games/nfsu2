@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WINEHQ="latest"
+WINEHQ="stable-9.0.0.0-bookworm"
 ROOT_DIR="/home/thomas/games/nfsu2"
 RUN="wine SPEED2.EXE"
 WINETRICKS="vd=1280x1024 dxvk"
