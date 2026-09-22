@@ -2,16 +2,13 @@
 
 REPO=0lfi/winehq
 
-#trixie
 RELEASES=$( cat << EOF
+trixie
 bookworm
 bullseye
 buster
 EOF
 )
-#stretch
-#jessie
-#wheezy
 
 BRANCHES=$( cat << EOF
 stable
