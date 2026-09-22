@@ -8,3 +8,5 @@ WINEARCH="win32"
 SET_LAA=""
 
 . $(dirname $(realpath $0))/shared/docker-run
+
+/home/thomas/games/sync.sh
