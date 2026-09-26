@@ -1,0 +1,11 @@
+#!/bin/bash
+
+WINEHQ="stable-11.0.0.0-trixie"
+WINETRICKS="dxvk mfc100 corefonts ogg physx vcrun2022" # dotnet48 # vcrun6sp6 vcrun2010
+APP_SUB_DIR="/Kenshi"
+
+ROOT_DIR="/home/thomas/games/kenshi"
+RUN="wine kenshi_x64.exe"
+
+WINEARCH="win64"
+. $(dirname $(realpath $0))/shared/docker-run
