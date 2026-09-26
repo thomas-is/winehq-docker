@@ -1,0 +1,11 @@
+#!/bin/bash
+
+WINEHQ="stable-9.0.0.0-bookworm"
+WINETRICKS="dxvk2020 mwo=disable"
+
+ROOT_DIR="/home/thomas/games/worldbox"
+APP_SUB_DIR="/Worldbox"
+RUN="wine worldbox.exe"
+
+WINEARCH="win64"
+. $(dirname $(realpath $0))/shared/docker-run
